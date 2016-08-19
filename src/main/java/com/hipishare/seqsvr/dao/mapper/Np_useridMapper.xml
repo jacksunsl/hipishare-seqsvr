@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- np_userid[np_userid]SQLMapper自动映射 -->
+<!-- 注意:此文件由AOS平台自动生成-禁止手工修改 2016-08-18 16:47:58 -->
+<mapper namespace="com.hipishare.seqsvr.dao.mapper.Np_useridMapper">
+
+	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
+	<insert id="insert" parameterType="Np_useridPO">
+		INSERT INTO np_userid (
+		<if test="userid != null">
+			userid, <!-- 用户id -->
+		</if>
+		<if test="openid != null and openid != ''">
+			openid, <!-- openid -->
+		</if>
+		<if test="section != null">
+			section, <!-- 号段,userid的号段 -->
+		</if>
+		<if test="status != null">
+			status, <!-- 状态（0：未使用 1：已使用 2：锁定） -->
+		</if>
+		<if test="create_time != null and create_time != ''">
+			create_time, <!-- 创建时间，资源号产生时间 -->
+		</if>
+		<if test="use_time != null and use_time != ''">
+			use_time, <!-- 使用时间 -->
+		</if>
+		<if test="account != null and account != ''">
+			account, <!-- 用户账号 -->
+		</if>
+		<if test="id != null">
+			id  <!-- id -->
+		</if>
+		)VALUES(
+		<if test="userid != null">
+			#{userid, jdbcType=NUMERIC}, <!-- 用户id -->
+		</if>
+		<if test="openid != null and openid != ''">
+			#{openid, jdbcType=VARCHAR}, <!-- openid -->
+		</if>
+		<if test="section != null">
+			#{section, jdbcType=INTEGER}, <!-- 号段,userid的号段 -->
+		</if>
+		<if test="status != null">
+			#{status, jdbcType=INTEGER}, <!-- 状态（0：未使用 1：已使用 2：锁定） -->
+		</if>
+		<if test="create_time != null and create_time != ''">
+			#{create_time, jdbcType=VARCHAR}, <!-- 创建时间，资源号产生时间 -->
+		</if>
+		<if test="use_time != null and use_time != ''">
+			#{use_time, jdbcType=VARCHAR}, <!-- 使用时间 -->
+		</if>
+		<if test="account != null and account != ''">
+			#{account, jdbcType=VARCHAR}, <!-- 用户账号 -->
+		</if>
+		<if test="id != null">
+			#{id, jdbcType=INTEGER}  <!-- id -->
+		</if>
+		)
+	</insert>
+
+	<!-- 插入一个数据持久化对象(含所有字段) -->
+	<insert id="insertAll" parameterType="Np_useridPO">
+		INSERT INTO np_userid (
+		<include refid="column" />
+		)
+		VALUES (
+		#{id, jdbcType=INTEGER},  <!-- id -->
+		#{userid, jdbcType=NUMERIC},  <!-- 用户id -->
+		#{openid, jdbcType=VARCHAR},  <!-- openid -->
+		#{section, jdbcType=INTEGER},  <!-- 号段,userid的号段 -->
+		#{status, jdbcType=INTEGER},  <!-- 状态（0：未使用 1：已使用 2：锁定） -->
+		#{create_time, jdbcType=VARCHAR},  <!-- 创建时间，资源号产生时间 -->
+		#{use_time, jdbcType=VARCHAR},  <!-- 使用时间 -->
+		#{account, jdbcType=VARCHAR}  <!-- 用户账号 -->
+		)
+	</insert>
+
+	<!-- 根据主键修改数据持久化对象 -->
+	<update id="updateByKey" parameterType="Np_useridPO">
+		UPDATE np_userid
+		<set>
+			<if test="id != null">
+				id = #{id, jdbcType=INTEGER},  <!-- id -->
+			</if>
+			<if test="userid != null">
+				userid = #{userid, jdbcType=NUMERIC},  <!-- 用户id -->
+			</if>
+			<if test="openid != null">
+				openid = #{openid, jdbcType=VARCHAR},  <!-- openid -->
+			</if>
+			<if test="section != null">
+				section = #{section, jdbcType=INTEGER},  <!-- 号段,userid的号段 -->
+			</if>
+			<if test="status != null">
+				status = #{status, jdbcType=INTEGER},  <!-- 状态（0：未使用 1：已使用 2：锁定） -->
+			</if>
+			<if test="create_time != null">
+				create_time = #{create_time, jdbcType=VARCHAR},  <!-- 创建时间，资源号产生时间 -->
+			</if>
+			<if test="use_time != null">
+				use_time = #{use_time, jdbcType=VARCHAR},  <!-- 使用时间 -->
+			</if>
+			<if test="account != null">
+				account = #{account, jdbcType=VARCHAR},  <!-- 用户账号 -->
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<!-- 根据主键删除数据持久化对象 -->
+	<delete id="deleteByKey">
+		DELETE FROM np_userid WHERE id = #{id}
+	</delete>
+
+	<!-- 根据主键查询并返回数据持久化对象 -->
+	<select id="selectByKey" resultType="Np_useridPO">
+		SELECT
+		<include refid="column" />
+		FROM np_userid WHERE id = #{id}
+	</select>
+
+	<!-- 表字段 -->
+	<sql id="column">
+		id,  <!-- id -->
+		userid,  <!-- 用户id -->
+		openid,  <!-- openid -->
+		section,  <!-- 号段,userid的号段 -->
+		status,  <!-- 状态（0：未使用 1：已使用 2：锁定） -->
+		create_time,  <!-- 创建时间，资源号产生时间 -->
+		use_time,  <!-- 使用时间 -->
+		account  <!-- 用户账号 -->
+	</sql>
+
+	<!-- 表字段(用于外表的关联时引用) -->
+	<sql id="column2">
+		np_userid.id,  <!-- id -->
+		np_userid.userid,  <!-- 用户id -->
+		np_userid.openid,  <!-- openid -->
+		np_userid.section,  <!-- 号段,userid的号段 -->
+		np_userid.status,  <!-- 状态（0：未使用 1：已使用 2：锁定） -->
+		np_userid.create_time,  <!-- 创建时间，资源号产生时间 -->
+		np_userid.use_time,  <!-- 使用时间 -->
+		np_userid.account  <!-- 用户账号 -->
+	</sql>
+
+	<!-- Where精确匹配字段 -->
+	<sql id="equal">
+		<if test="id != null ">
+			AND id = #{id}  <!-- id -->
+		</if>
+		<if test="userid != null ">
+			AND userid = #{userid}  <!-- 用户id -->
+		</if>
+		<if test="openid != null and openid != ''">
+			AND openid = #{openid}  <!-- openid -->
+		</if>
+		<if test="section != null ">
+			AND section = #{section}  <!-- 号段,userid的号段 -->
+		</if>
+		<if test="status != null ">
+			AND status = #{status}  <!-- 状态（0：未使用 1：已使用 2：锁定） -->
+		</if>
+		<if test="create_time != null and create_time != ''">
+			AND create_time = #{create_time}  <!-- 创建时间，资源号产生时间 -->
+		</if>
+		<if test="use_time != null and use_time != ''">
+			AND use_time = #{use_time}  <!-- 使用时间 -->
+		</if>
+		<if test="account != null and account != ''">
+			AND account = #{account}  <!-- 用户账号 -->
+		</if>
+	</sql>
+
+	<!-- Where模糊匹配字段 -->
+	<sql id="like">
+		<if test="openid != null and openid != ''">
+			AND openid like '%${openid}%'  <!-- openid -->
+		</if>
+		<if test="create_time != null and create_time != ''">
+			AND create_time like '%${create_time}%'  <!-- 创建时间，资源号产生时间 -->
+		</if>
+		<if test="use_time != null and use_time != ''">
+			AND use_time like '%${use_time}%'  <!-- 使用时间 -->
+		</if>
+		<if test="account != null and account != ''">
+			AND account like '%${account}%'  <!-- 用户账号 -->
+		</if>
+	</sql>
+
+	<update id="updateUseridPOByAccount" parameterType="Np_useridPO">
+		UPDATE np_userid
+		<set>
+			<if test="status != null">
+				status = #{status, jdbcType=INTEGER},  <!-- 状态（0：未使用 1：已使用 2：锁定） -->
+			</if>
+			<if test="use_time != null">
+				use_time = #{use_time, jdbcType=VARCHAR},  <!-- 使用时间 -->
+			</if>
+			<if test="account != null">
+				account = #{account, jdbcType=VARCHAR}  <!-- 用户账号 -->
+			</if>
+		</set>
+		WHERE status = 0 limit 1
+	</update>
+
+	<select id="selectUseridPOByAccount" parameterType="java.lang.String"
+		resultType="Np_useridPO">
+		select
+			id,  <!-- id -->
+			userid,  <!-- 用户id -->
+			openid,  <!-- openid -->
+			section,  <!-- 号段,userid的号段 -->
+			status,  <!-- 状态（0：未使用 1：已使用 2：锁定） -->
+			create_time,  <!-- 创建时间，资源号产生时间 -->
+			use_time,  <!-- 使用时间 -->
+			account  <!-- 用户账号 -->
+		from
+			np_userid
+		where account = #{account}
+	</select>
+
+</mapper>
