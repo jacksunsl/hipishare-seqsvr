@@ -21,6 +21,7 @@ public class SeqServerController {
 			userIdPoolService = (UserIdPoolService)SpringContextUtil.getBean("userIdPoolService");
 		} catch (Exception e) {
 			e.printStackTrace();
+			LOGGER.error("[SeqServerController] userIdPoolService注入失败");
 		}
 	}
 	

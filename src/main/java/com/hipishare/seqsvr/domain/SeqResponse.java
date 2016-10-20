@@ -1,7 +1,5 @@
 package com.hipishare.seqsvr.domain;
 
-import java.math.BigDecimal;
-
 public class SeqResponse {
 	
 	private boolean flag;
@@ -10,7 +8,7 @@ public class SeqResponse {
 	
 	private String account;
 	
-	private BigDecimal userid;
+	private Integer userid;
 	
 	private String openid;
 
@@ -38,11 +36,11 @@ public class SeqResponse {
 		this.account = account;
 	}
 
-	public BigDecimal getUserid() {
+	public Integer getUserid() {
 		return userid;
 	}
 
-	public void setUserid(BigDecimal userid) {
+	public void setUserid(Integer userid) {
 		this.userid = userid;
 	}
 

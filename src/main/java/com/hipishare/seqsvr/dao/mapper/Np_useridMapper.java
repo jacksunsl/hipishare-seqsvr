@@ -63,4 +63,6 @@ public interface Np_useridMapper {
 	
 	Np_useridPO selectUseridPOByAccount(String account);
 	
+	Np_useridPO findUseridPOByUserid(@Param(value = "userid") Integer userid);
+	
 }

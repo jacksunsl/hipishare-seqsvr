@@ -9,9 +9,6 @@
 	<!-- 插入一个数据持久化对象(插入字段为传入PO实体的非空属性) -->
 	<insert id="insert" parameterType="Np_useridPO">
 		INSERT INTO np_userid (
-		<if test="userid != null">
-			userid, <!-- 用户id -->
-		</if>
 		<if test="openid != null and openid != ''">
 			openid, <!-- openid -->
 		</if>
@@ -21,22 +18,19 @@
 		<if test="status != null">
 			status, <!-- 状态（0：未使用 1：已使用 2：锁定） -->
 		</if>
-		<if test="create_time != null and create_time != ''">
+		<if test="create_time != null">
 			create_time, <!-- 创建时间，资源号产生时间 -->
 		</if>
-		<if test="use_time != null and use_time != ''">
+		<if test="use_time != null">
 			use_time, <!-- 使用时间 -->
 		</if>
 		<if test="account != null and account != ''">
 			account, <!-- 用户账号 -->
 		</if>
-		<if test="id != null">
-			id  <!-- id -->
+		<if test="userid != null">
+			userid <!-- 用户id -->
 		</if>
 		)VALUES(
-		<if test="userid != null">
-			#{userid, jdbcType=NUMERIC}, <!-- 用户id -->
-		</if>
 		<if test="openid != null and openid != ''">
 			#{openid, jdbcType=VARCHAR}, <!-- openid -->
 		</if>
@@ -46,17 +40,17 @@
 		<if test="status != null">
 			#{status, jdbcType=INTEGER}, <!-- 状态（0：未使用 1：已使用 2：锁定） -->
 		</if>
-		<if test="create_time != null and create_time != ''">
+		<if test="create_time != null">
 			#{create_time, jdbcType=VARCHAR}, <!-- 创建时间，资源号产生时间 -->
 		</if>
-		<if test="use_time != null and use_time != ''">
+		<if test="use_time != null">
 			#{use_time, jdbcType=VARCHAR}, <!-- 使用时间 -->
 		</if>
 		<if test="account != null and account != ''">
 			#{account, jdbcType=VARCHAR}, <!-- 用户账号 -->
 		</if>
-		<if test="id != null">
-			#{id, jdbcType=INTEGER}  <!-- id -->
+		<if test="userid != null">
+			#{userid, jdbcType=INTEGER} <!-- 用户id -->
 		</if>
 		)
 	</insert>
@@ -68,7 +62,7 @@
 		)
 		VALUES (
 		#{id, jdbcType=INTEGER},  <!-- id -->
-		#{userid, jdbcType=NUMERIC},  <!-- 用户id -->
+		#{userid, jdbcType=INTEGER},  <!-- 用户id -->
 		#{openid, jdbcType=VARCHAR},  <!-- openid -->
 		#{section, jdbcType=INTEGER},  <!-- 号段,userid的号段 -->
 		#{status, jdbcType=INTEGER},  <!-- 状态（0：未使用 1：已使用 2：锁定） -->
@@ -86,7 +80,7 @@
 				id = #{id, jdbcType=INTEGER},  <!-- id -->
 			</if>
 			<if test="userid != null">
-				userid = #{userid, jdbcType=NUMERIC},  <!-- 用户id -->
+				userid = #{userid, jdbcType=INTEGER},  <!-- 用户id -->
 			</if>
 			<if test="openid != null">
 				openid = #{openid, jdbcType=VARCHAR},  <!-- openid -->
@@ -146,50 +140,6 @@
 		np_userid.account  <!-- 用户账号 -->
 	</sql>
 
-	<!-- Where精确匹配字段 -->
-	<sql id="equal">
-		<if test="id != null ">
-			AND id = #{id}  <!-- id -->
-		</if>
-		<if test="userid != null ">
-			AND userid = #{userid}  <!-- 用户id -->
-		</if>
-		<if test="openid != null and openid != ''">
-			AND openid = #{openid}  <!-- openid -->
-		</if>
-		<if test="section != null ">
-			AND section = #{section}  <!-- 号段,userid的号段 -->
-		</if>
-		<if test="status != null ">
-			AND status = #{status}  <!-- 状态（0：未使用 1：已使用 2：锁定） -->
-		</if>
-		<if test="create_time != null and create_time != ''">
-			AND create_time = #{create_time}  <!-- 创建时间，资源号产生时间 -->
-		</if>
-		<if test="use_time != null and use_time != ''">
-			AND use_time = #{use_time}  <!-- 使用时间 -->
-		</if>
-		<if test="account != null and account != ''">
-			AND account = #{account}  <!-- 用户账号 -->
-		</if>
-	</sql>
-
-	<!-- Where模糊匹配字段 -->
-	<sql id="like">
-		<if test="openid != null and openid != ''">
-			AND openid like '%${openid}%'  <!-- openid -->
-		</if>
-		<if test="create_time != null and create_time != ''">
-			AND create_time like '%${create_time}%'  <!-- 创建时间，资源号产生时间 -->
-		</if>
-		<if test="use_time != null and use_time != ''">
-			AND use_time like '%${use_time}%'  <!-- 使用时间 -->
-		</if>
-		<if test="account != null and account != ''">
-			AND account like '%${account}%'  <!-- 用户账号 -->
-		</if>
-	</sql>
-
 	<update id="updateUseridPOByAccount" parameterType="Np_useridPO">
 		UPDATE np_userid
 		<set>
@@ -222,4 +172,18 @@
 		where account = #{account}
 	</select>
 
+	<select id="findUseridPOByUserid" parameterType="java.lang.Integer" resultType="Np_useridPO">
+		select
+			id,  <!-- id -->
+			userid,  <!-- 用户id -->
+			openid,  <!-- openid -->
+			section,  <!-- 号段,userid的号段 -->
+			status,  <!-- 状态（0：未使用 1：已使用 2：锁定） -->
+			create_time,  <!-- 创建时间，资源号产生时间 -->
+			use_time,  <!-- 使用时间 -->
+			account  <!-- 用户账号 -->
+		from
+			np_userid
+		where userid = #{userid}
+	</select>
 </mapper>

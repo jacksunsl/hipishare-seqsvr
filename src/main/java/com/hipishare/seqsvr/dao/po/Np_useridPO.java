@@ -1,6 +1,5 @@
 package com.hipishare.seqsvr.dao.po;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -22,7 +21,7 @@ public class Np_useridPO {
 	/**
 	 * 用户id
 	 */
-	private BigDecimal userid;
+	private Integer userid;
 	
 	/**
 	 * openid
@@ -69,7 +68,7 @@ public class Np_useridPO {
 	 * 
 	 * @return userid
 	 */
-	public BigDecimal getUserid() {
+	public Integer getUserid() {
 		return userid;
 	}
 	
@@ -142,7 +141,7 @@ public class Np_useridPO {
 	 * 
 	 * @param userid
 	 */
-	public void setUserid(BigDecimal userid) {
+	public void setUserid(Integer userid) {
 		this.userid = userid;
 	}
 	

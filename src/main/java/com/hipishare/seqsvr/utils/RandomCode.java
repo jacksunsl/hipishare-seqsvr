@@ -42,9 +42,9 @@ public class RandomCode {
 	
 	public static Integer getRandomNum(int length){
 		Random random = new Random();
-		String val = "";
-		for (int i = 0; i < length; i++) {
-			val += String.valueOf(random.nextInt(length));
+		String val = "" + (random.nextInt(9) + 1);
+		for (int i = 0; i < length - 1; i++) {
+			val += String.valueOf(random.nextInt(10));
 		}
 		return Integer.parseInt(val);
 	}
