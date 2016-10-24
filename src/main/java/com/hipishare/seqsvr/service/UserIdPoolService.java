@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hipishare.seqsvr.dao.mapper.Np_useridMapper;
 import com.hipishare.seqsvr.dao.po.Np_useridPO;
+import com.hipishare.seqsvr.domain.response.UseridSeqRsp;
 import com.hipishare.seqsvr.exception.SeqServerException;
 import com.hipishare.seqsvr.utils.RandomCode;
 
@@ -26,8 +27,8 @@ public class UserIdPoolService {
 	 * @return
 	 * @throws SeqServerException
 	 */
-	@Transactional(readOnly = true)
-	public Np_useridPO getUserIdPO(String account) throws SeqServerException {
+	@Transactional
+	public UseridSeqRsp getUserIdPO(String account) throws SeqServerException {
 		Np_useridPO np_useridPO = null;
 		if (null == account || "".equals(account)) {
 			SeqServerException.raise("2002");
@@ -45,7 +46,11 @@ public class UserIdPoolService {
 			np_useridPO = null;
 			np_useridPO = useridMapper.selectUseridPOByAccount(account);
 		}
-		return np_useridPO;
+		UseridSeqRsp useridRsp = new UseridSeqRsp();
+		useridRsp.setAccount(np_useridPO.getAccount());
+		useridRsp.setOpenid(np_useridPO.getOpenid());
+		useridRsp.setUserid("" + np_useridPO.getSection() + np_useridPO.getUserid());
+		return useridRsp;
 	}
 	
 	/**

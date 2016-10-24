@@ -5,7 +5,7 @@ import org.restexpress.Request;
 import org.restexpress.Response;
 import org.springframework.util.StringUtils;
 
-import com.hipishare.seqsvr.domain.SeqResponse;
+import com.hipishare.seqsvr.domain.response.ResponseObject;
 import com.hipishare.seqsvr.exception.SeqServerException;
 import com.hipishare.seqsvr.service.UserIdPoolService;
 import com.hipishare.seqsvr.utils.SpringContextUtil;
@@ -37,26 +37,26 @@ public class UseridGenController {
 	public Object genUserid(Request request, Response response) {
 		long t1 = System.currentTimeMillis();
 		LOGGER.info("[UseridGenController.genUserid][begin]");
-		SeqResponse seqResponse = new SeqResponse();
+		ResponseObject responseObj = new ResponseObject();
 		try {
 			int genNum = 100;
 			if (!StringUtils.isEmpty(request.getHeader("genNum"))) {
 				genNum = Integer.parseInt(request.getHeader("genNum"));
 			}
 			userIdPoolService.genUserid(genNum);
-			seqResponse.setFlag(true);
-			seqResponse.setMsg("生成成功");
+			responseObj.setCode("00");
+			responseObj.setMsg("生成成功");
 		} catch (SeqServerException e) {
-			seqResponse.setFlag(false);
-			seqResponse.setMsg(e.getMessage());
+			responseObj.setCode("99");
+			responseObj.setMsg(e.getMessage());
 			LOGGER.error(e);
 		} catch (Exception e) {
-			seqResponse.setFlag(false);
-			seqResponse.setMsg("系统异常，请检查seqsvr服务。");
+			responseObj.setCode("99");
+			responseObj.setMsg("系统异常，请检查seqsvr服务。");
 			LOGGER.error(e);
 		}
 		long t2 = System.currentTimeMillis();
 		LOGGER.info("[UseridGenController.genUserid][end] spend:" + (t2-t1));
-		return seqResponse;
+		return responseObj;
 	}
 }
